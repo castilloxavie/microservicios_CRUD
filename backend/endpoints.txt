@@ -40,3 +40,47 @@
 
 - **DELETE** http://localhost:3003/api/suma/path/:id
   - Respuesta: Mensaje de eliminación
+
+
+ 
+
+## Microservicio Resta Body (Puerto 4001)
+- **POST** http://localhost:4001/api/resta/body
+  - Body (JSON): { "numero1": 5, "numero2": 3 }
+  - Respuesta: { "id": 1, "numero1": "5", "numero2": "3", "resultado": 2, "tipo_operacion": "resta", "tipo_parametros": "body" }
+
+- **GET** http://localhost:4001/api/resta/body
+  - Respuesta: Array de operaciones resta con body
+
+- **PUT** http://localhost:4001/api/resta/body/:id
+  - Body (JSON): { "numero1": 10, "numero2": 5 }
+  - Respuesta: Operación actualizada
+
+- **DELETE** http://localhost:4001/api/resta/body/:id
+  - Respuesta: Mensaje de eliminación
+
+## Microservicio Resta Query (Puerto 4002)
+- **POST** http://localhost:4002/api/resta/query?numero1=5&numero2=3
+  - Respuesta: { "id": 1, "numero1": "5", "numero2": "3", "resultado": 2, "tipo_operacion": "resta", "tipo_parametros": "query" }
+
+- **GET** http://localhost:4002/api/resta/query
+  - Respuesta: Array de operaciones resta con query
+
+- **PUT** http://localhost:4002/api/resta/query/:id?numero1=10&numero2=5
+  - Respuesta: Operación actualizada
+
+- **DELETE** http://localhost:4002/api/resta/query/:id
+  - Respuesta: Mensaje de eliminación
+
+## Microservicio Resta Path (Puerto 4003)
+- **POST** http://localhost:4003/api/resta/path/5/3
+  - Respuesta: { "id": 1, "numero1": "5", "numero2": "3", "resultado": 2, "tipo_operacion": "resta", "tipo_parametros": "path" }
+
+- **GET** http://localhost:4003/api/resta/path
+  - Respuesta: Array de operaciones resta con path
+
+- **PUT** http://localhost:4003/api/resta/path/:id/10/5
+  - Respuesta: Operación actualizada
+
+- **DELETE** http://localhost:4003/api/resta/path/:id
+  - Respuesta: Mensaje de eliminación

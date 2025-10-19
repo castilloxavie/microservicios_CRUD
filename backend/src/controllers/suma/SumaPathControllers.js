@@ -13,6 +13,7 @@ class SumaPathControllers {
 
             const resultado = Number(numero1) + Number(numero2);
             const data = await this.model.crear(numero1, numero2, resultado, 'suma', 'path');
+            console.log("Operacion de suma creada:", data);
             res.status(201).json(data);
 
 
@@ -25,6 +26,7 @@ class SumaPathControllers {
     async listar(req, res){
         try {
             const data = await this.model.listar('suma', 'path');
+            console.log("Operaciones de suma listadas:", data);
             res.status(200).json(data);
 
         } catch (error) {
@@ -47,7 +49,9 @@ class SumaPathControllers {
             if(!respuesta) {
                 return res.status(404).json({error: 'registro no encontrada'});
             }
+            console.log("Operacion de suma actualizada:", respuesta);
             res.status(200).json(respuesta);
+            
         } catch (error) {
             console.error("Error al actualizar la operación:", error);
             res.status(500).json({error: "Error interno del servidor"});
@@ -58,7 +62,9 @@ class SumaPathControllers {
         try {
             const {id} = req.params;
             const respuesta = await this.model.eliminar(id);
+            console.log("Operacion de suma eliminada:", respuesta);
             res.status(200).json(respuesta);
+
         } catch (error) {
             console.error("Error al eliminar la operación:", error);
             res.status(500).json({error: "Error interno del servidor"});

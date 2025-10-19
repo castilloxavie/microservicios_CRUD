@@ -11,8 +11,11 @@ class SumaBodyControllers {
             }
             const resultado = Number(numero1) + Number (numero2);
             const data = await this.model.crear(numero1, numero2, resultado, 'suma', 'body');
+            console.log("Operacion de suma creada:", data);
             res.status(201).json(data);
+
         } catch (error) {
+            console.error("Error al crear la operación:", error)
             res.status(500).json({error: error.message});
         }
     }
@@ -20,8 +23,11 @@ class SumaBodyControllers {
     async listar(req, res) {
         try {
             const data = await this.model.listar('suma', 'body');
+            console.log("Operaciones de suma listadas:", data);
             res.status(200).json(data);
+
         } catch (error) {
+            console.error("Error al listar las operaciones:", error)
             res.status(500).json({ error: error.message });
         }
     }
@@ -41,6 +47,7 @@ class SumaBodyControllers {
             if(!respuesta){
                 return res.status(404).json({error: 'registro no encontrada'})
             }
+            console.log("Operacion de suma actualizada:", respuesta);
             res.status(200).json(respuesta);
 
 
@@ -54,6 +61,7 @@ class SumaBodyControllers {
         try{
             const {id} = req.params
             const respuesta = await this.model.eliminar (id);
+            console.log("Operacion de suma eliminada:", respuesta);
             res.status(200).json(respuesta);
         
         } catch (error) {

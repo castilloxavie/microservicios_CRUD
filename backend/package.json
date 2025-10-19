@@ -6,7 +6,12 @@
     "start:body": "nodemon server/suma/index.js",
     "start:query": "nodemon server/suma/indexQuery.js",
     "start:path": "nodemon server/suma/indexPath.js",
-    "start:all": "concurrently \"npm run start:body\" \"npm run start:query\" \"npm run start:path\"",
+    "start:all_suma": "concurrently \"npm run start:body\" \"npm run start:query\" \"npm run start:path\"",
+    "start:resta_body": "nodemon server/resta/index.js",
+    "start:resta_query": "nodemon server/resta/indexQuery.js",
+    "start:resta_path": "nodemon server/resta/indexPath.js",
+    "start:all_resta": "concurrently \"npm run start:resta_body\" \"npm run start:resta_query\" \"npm run start:resta_path\"",
+    "start:all": "concurrently \"npm run start:all_suma\" \"npm run start:all_resta\"",
     "dev": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
