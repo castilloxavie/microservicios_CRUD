@@ -12,10 +12,8 @@ const db = new  sqlite3.Database(dbPath, (err) => {
 })
 
 db.serialize(() => {
-    db.run(`DROP TABLE IF EXISTS operaciones`);
-
     db.run(
-        `CREATE TABLE operaciones (
+        `CREATE TABLE IF NOT EXISTS operaciones (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             numero1 REAL NOT NULL,
             numero2 REAL NOT NULL,
@@ -23,7 +21,14 @@ db.serialize(() => {
             tipo_operacion TEXT NOT NULL,
             tipo_parametros TEXT NOT NULL,
             fecha_creacion TEXT DEFAULT CURRENT_TIMESTAMP
-        )`
+        )`,
+        (err) => {
+            if (err) {
+                console.error('Error al crear tabla:', err.message);
+            } else {
+                console.log('Tabla operaciones verificada/creada exitosamente.');
+            }
+        }
     );
 });
 module.exports = db;

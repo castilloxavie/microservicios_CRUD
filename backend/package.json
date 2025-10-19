@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start:body": "node server/index.js",
-    "start:query": "node server/indexQuery.js",
-    "start:path": "node server/indexPath.js",
+    "start:body": "nodemon server/suma/index.js",
+    "start:query": "nodemon server/suma/indexQuery.js",
+    "start:path": "nodemon server/suma/indexPath.js",
     "start:all": "concurrently \"npm run start:body\" \"npm run start:query\" \"npm run start:path\"",
     "dev": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,6 +17,7 @@
     "body-parser": "^2.2.0",
     "concurrently": "^9.2.1",
     "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "sqlite3": "^5.1.7"
   },

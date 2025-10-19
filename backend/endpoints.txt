@@ -1,0 +1,42 @@
+# Endpoints para pruebas en Postman
+
+## Microservicio Suma Body (Puerto 3001)
+- **POST** http://localhost:3001/api/suma/body
+  - Body (JSON): { "numero1": 5, "numero2": 3 }
+  - Respuesta: { "id": 1, "numero1": "5", "numero2": "3", "resultado": 8, "tipo_operacion": "suma", "tipo_parametros": "body" }
+
+- **GET** http://localhost:3001/api/suma/body
+  - Respuesta: Array de operaciones suma con body
+
+- **PUT** http://localhost:3001/api/suma/body/:id
+  - Body (JSON): { "numero1": 10, "numero2": 5 }
+  - Respuesta: Operación actualizada
+
+- **DELETE** http://localhost:3001/api/suma/body/:id
+  - Respuesta: Mensaje de eliminación
+
+## Microservicio Suma Query (Puerto 3002)
+- **POST** http://localhost:3002/api/suma/query?numero1=5&numero2=3
+  - Respuesta: { "id": 1, "numero1": "5", "numero2": "3", "resultado": 8, "tipo_operacion": "suma", "tipo_parametros": "query" }
+
+- **GET** http://localhost:3002/api/suma/query
+  - Respuesta: Array de operaciones suma con query
+
+- **PUT** http://localhost:3002/api/suma/query/:id?numero1=10&numero2=5
+  - Respuesta: Operación actualizada
+
+- **DELETE** http://localhost:3002/api/suma/query/:id
+  - Respuesta: Mensaje de eliminación
+
+## Microservicio Suma Path (Puerto 3003)
+- **POST** http://localhost:3003/api/suma/path/5/3
+  - Respuesta: { "id": 1, "numero1": "5", "numero2": "3", "resultado": 8, "tipo_operacion": "suma", "tipo_parametros": "path" }
+
+- **GET** http://localhost:3003/api/suma/path
+  - Respuesta: Array de operaciones suma con path
+
+- **PUT** http://localhost:3003/api/suma/path/:id/10/5
+  - Respuesta: Operación actualizada
+
+- **DELETE** http://localhost:3003/api/suma/path/:id
+  - Respuesta: Mensaje de eliminación
