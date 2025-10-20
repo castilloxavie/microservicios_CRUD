@@ -2,6 +2,15 @@
 
 Sistema de microservicios en Node.js para realizar operaciones matemáticas básicas (suma, resta, multiplicación y división) con diferentes tipos de parámetros (body, query, path) y persistencia en SQLite.
 
+## 🚀 Características Actuales
+
+- ✅ **12 Microservicios Independientes**: Cada operación matemática tiene 3 microservicios (body, query, path)
+- ✅ **Documentación Swagger Completa**: UI interactiva en `/api-docs` con todos los endpoints organizados por tags
+- ✅ **Base de Datos SQLite**: Persistencia compartida entre todos los microservicios
+- ✅ **Arquitectura Modular**: Controladores, modelos, rutas y configuración separados
+- ✅ **Scripts de Desarrollo**: Comandos npm para ejecutar microservicios individuales o todos simultáneamente
+- ✅ **Limpieza de Base de Datos**: Script para resetear datos de prueba
+
 ## Arquitectura
 
 El proyecto consta de 12 microservicios independientes que comparten la misma base de datos:
@@ -330,32 +339,88 @@ La aplicación utiliza SQLite con una tabla `operaciones` que almacena:
 ```
 backend/
 ├── .env                    # Variables de entorno
+├── .gitignore             # Archivos ignorados por Git
 ├── package.json           # Dependencias y scripts
+├── package-lock.json      # Lock de dependencias
+├── clearDatabase.js       # Script para limpiar base de datos
+├── endpoints.txt          # Documentación de endpoints para Postman
 ├── server/
+│   ├── index.js           # Servidor principal con Swagger
 │   ├── suma/
 │   │   ├── index.js           # Punto de entrada microservicio Suma Body
 │   │   ├── indexQuery.js      # Punto de entrada microservicio Suma Query
-│   │   ├── indexPath.js       # Punto de entrada microservicio Suma Path
-│   │   ├── ServerSumaBody.js  # Clase servidor Suma Body
-│   │   ├── ServerSumaQuery.js # Clase servidor Suma Query
-│   │   └── ServerSumaPath.js  # Clase servidor Suma Path
-│   └── resta/
-│       ├── index.js           # Punto de entrada microservicio Resta Body
-│       ├── indexQuery.js      # Punto de entrada microservicio Resta Query
-│       ├── indexPath.js       # Punto de entrada microservicio Resta Path
-│       ├── ServerRestaBody.js # Clase servidor Resta Body
-│       ├── ServerRestaQuery.js# Clase servidor Resta Query
-│       └── ServerRestaPath.js # Clase servidor Resta Path
+│   │   └── indexPath.js       # Punto de entrada microservicio Suma Path
+│   ├── resta/
+│   │   ├── index.js           # Punto de entrada microservicio Resta Body
+│   │   ├── indexQuery.js      # Punto de entrada microservicio Resta Query
+│   │   └── indexPath.js       # Punto de entrada microservicio Resta Path
+│   ├── multiplicacion/
+│   │   ├── index.js           # Punto de entrada microservicio Multiplicación Body
+│   │   ├── indexQuery.js      # Punto de entrada microservicio Multiplicación Query
+│   │   └── indexPath.js       # Punto de entrada microservicio Multiplicación Path
+│   └── division/
+│       ├── index.js           # Punto de entrada microservicio División Body
+│       ├── indexQuery.js      # Punto de entrada microservicio División Query
+│       └── indexPath.js       # Punto de entrada microservicio División Path
 ├── src/
+│   ├── swagger.js         # Configuración de Swagger UI
+│   ├── swaggerDocs.js     # Documentación OpenAPI de Swagger
 │   ├── controllers/       # Controladores de negocio
 │   │   ├── suma/          # Controladores de suma
+│   │   │   ├── SumaBodyControllers.js
+│   │   │   ├── SumaPathControllers.js
+│   │   │   └── SumaQueryControllers.js
 │   │   ├── resta/         # Controladores de resta
+│   │   │   ├── RestaBodyControllers.js
+│   │   │   ├── RestaPathControllers.js
+│   │   │   └── RestaQueryControllers.js
 │   │   ├── multiplicacion/ # Controladores de multiplicación
+│   │   │   ├── MultiplicacionBodyControllers.js
+│   │   │   ├── MultiplicacionPathControllers.js
+│   │   │   └── MultiplicacionQueryControllers.js
 │   │   └── division/      # Controladores de división
+│   │       ├── DivisionBodyControllers.js
+│   │       ├── DivisionPathControllers.js
+│   │       └── DivisionQueryControllers.js
 │   ├── models/           # Modelos de datos
+│   │   └── OperacionesModels.js
 │   ├── router/           # Definición de rutas
+│   │   ├── suma/
+│   │   │   ├── sumaBodyRoutes.js
+│   │   │   ├── sumaPathRoutes.js
+│   │   │   └── sumaQueryRoutes.js
+│   │   ├── resta/
+│   │   │   ├── restaBodyRoutes.js
+│   │   │   ├── restaPathRoutes.js
+│   │   │   └── restaQueryRoutes.js
+│   │   ├── multiplicacion/
+│   │   │   ├── multiplicacionBodyRoutes.js
+│   │   │   ├── multiplicacionPathRoutes.js
+│   │   │   └── multiplicacionQueryRoutes.js
+│   │   └── division/
+│   │       ├── divisionBodyRoutes.js
+│   │       ├── divisionPathRoutes.js
+│   │       └── divisionQueryRoutes.js
+│   ├── server/           # Clases servidor para cada microservicio
+│   │   ├── suma/
+│   │   │   ├── ServerSumaBody.js
+│   │   │   ├── ServerSumaPath.js
+│   │   │   └── ServerSumaQuery.js
+│   │   ├── resta/
+│   │   │   ├── ServerRestaBody.js
+│   │   │   ├── ServerRestaPath.js
+│   │   │   └── ServerRestaQuery.js
+│   │   ├── multiplicacion/
+│   │   │   ├── ServerMultiplicacionBody.js
+│   │   │   ├── ServerMultiplicacionPath.js
+│   │   │   └── ServerMultiplicacionQuery.js
+│   │   └── division/
+│   │       ├── ServerDivisionBody.js
+│   │       ├── ServerDivisionPath.js
+│   │       └── ServerDivisionQuery.js
 │   └── database/         # Configuración BD
-├── endpoints.txt         # Documentación de endpoints para Postman
+│       ├── databases.js
+│       └── app_database.db
 └── node_modules/         # Dependencias
 ```
 
@@ -363,12 +428,28 @@ backend/
 
 Importa la colección de Postman desde `endpoints.txt` o crea requests manualmente siguiendo los ejemplos de curl arriba.
 
-## Próximos pasos
+## Documentación Swagger
 
-- Agregar validaciones más robustas
-- Implementar logging avanzado
-- Agregar tests unitarios
-- Documentación con Swagger/OpenAPI
+La documentación completa de la API está disponible a través de Swagger UI. Para acceder:
+
+1. Ejecuta el servidor principal:
+```bash
+npm run dev  # Puerto 3000 por defecto
+```
+
+2. Abre tu navegador y ve a: `http://localhost:3000/api-docs`
+
+3. La documentación incluye:
+   - Todos los endpoints organizados por operación (Suma, Resta, Multiplicación, División)
+   - Esquemas de request/response
+   - Ejemplos de uso
+   - Posibilidad de probar los endpoints directamente desde la interfaz
+
+**Nota:** Si el servidor se cierra inmediatamente al ejecutar `npm run dev`, verifica que el archivo `backend/server/index.js` tenga la configuración correcta de middlewares y servidor como se muestra en el código actualizado.
+
+
+
+
 
 ## Contribución
 
