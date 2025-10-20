@@ -1,6 +1,6 @@
 # Microservicios CRUD - Operaciones Matemáticas
 
-Sistema de microservicios en Node.js para realizar operaciones matemáticas básicas (suma, resta, multiplicación y división) con diferentes tipos de parámetros (body, query, path) y persistencia en SQLite.
+Sistema de microservicios en Node.js para realizar operaciones matemáticas básicas (suma, resta, multiplicación y división) con diferentes tipos de parámetros (body, query, path) y persistencia en SQLite. Incluye un frontend en React para interactuar con los microservicios.
 
 ## 🚀 Características Actuales
 
@@ -10,10 +10,11 @@ Sistema de microservicios en Node.js para realizar operaciones matemáticas bás
 - ✅ **Arquitectura Modular**: Controladores, modelos, rutas y configuración separados
 - ✅ **Scripts de Desarrollo**: Comandos npm para ejecutar microservicios individuales o todos simultáneamente
 - ✅ **Limpieza de Base de Datos**: Script para resetear datos de prueba
+- ✅ **Frontend en React**: Interfaz de usuario para interactuar con los microservicios
 
 ## Arquitectura
 
-El proyecto consta de 12 microservicios independientes que comparten la misma base de datos:
+El proyecto consta de 12 microservicios independientes que comparten la misma base de datos, más un frontend en React.
 
 ### Microservicios de Suma:
 - **Microservicio Suma Body** (Puerto 3001): Operaciones con parámetros en JSON body
@@ -35,29 +36,44 @@ El proyecto consta de 12 microservicios independientes que comparten la misma ba
 - **Microservicio División Query** (Puerto 6002): Operaciones con parámetros en query string
 - **Microservicio División Path** (Puerto 6003): Operaciones con parámetros en URL path
 
+### Frontend:
+- **Aplicación React**: Interfaz de usuario para realizar operaciones matemáticas a través de los microservicios
+
 ## Tecnologías
 
+### Backend:
 - **Node.js** - Runtime de JavaScript
 - **Express.js** - Framework web
 - **SQLite3** - Base de datos
 - **CORS** - Middleware para cross-origin
 - **Body-parser** - Middleware para parsing de JSON
 
+### Frontend:
+- **React** - Biblioteca para interfaces de usuario
+- **Vite** - Herramienta de desarrollo rápida
+- **ESLint** - Linter para JavaScript/React
+
 ## Instalación
 
 1. Clona el repositorio:
 ```bash
-git clone <url-del-repositorio>
+git clone <https://github.com/castilloxavie/microservicios_CRUD.git>
 cd backend_nodeJs/microservicios_CRUD
 ```
 
-2. Instala las dependencias:
+2. Instala las dependencias del backend:
 ```bash
 cd backend
 npm install
 ```
 
-3. Configura las variables de entorno (archivo `.env`):
+3. Instala las dependencias del frontend:
+```bash
+cd ../frontend
+npm install
+```
+
+4. Configura las variables de entorno (archivo `backend/.env`):
 ```env
 PORT_SUMABODY=3001
 PORT_SUMAQUERY=3002
@@ -134,6 +150,13 @@ npm run dev:multiplicacion_path
 npm run dev:division_body
 npm run dev:division_query
 npm run dev:division_path
+```
+
+### Ejecutar el frontend:
+
+```bash
+cd frontend
+npm run dev  # Inicia el servidor de desarrollo en http://localhost:5173
 ```
 
 ## Endpoints
@@ -422,6 +445,32 @@ backend/
 │       ├── databases.js
 │       └── app_database.db
 └── node_modules/         # Dependencias
+
+frontend/
+├── .gitignore            # Archivos ignorados por Git
+├── eslint.config.js      # Configuración de ESLint
+├── index.html            # Punto de entrada HTML
+├── package.json          # Dependencias y scripts
+├── package-lock.json     # Lock de dependencias
+├── vite.config.js        # Configuración de Vite
+├── public/
+│   └── vite.svg          # Ícono de Vite
+├── src/
+│   ├── App.css           # Estilos de la aplicación
+│   ├── App.jsx           # Componente principal de React
+│   ├── index.css         # Estilos globales
+│   ├── main.jsx          # Punto de entrada de React
+│   ├── assets/
+│   │   └── react.svg     # Ícono de React
+│   ├── components/
+│   │   └── Calculator.jsx # Componente de calculadora
+│   ├── hooks/
+│   │   └── useCalculator.js # Hook personalizado para la calculadora
+│   ├── services/
+│   │   └── apiService.js # Servicio para llamadas a la API
+│   └── utils/
+│       └── constants.js  # Constantes de la aplicación
+└── node_modules/         # Dependencias
 ```
 
 ## Testing con Postman
@@ -447,9 +496,24 @@ npm run dev  # Puerto 3000 por defecto
 
 **Nota:** Si el servidor se cierra inmediatamente al ejecutar `npm run dev`, verifica que el archivo `backend/server/index.js` tenga la configuración correcta de middlewares y servidor como se muestra en el código actualizado.
 
+## Frontend
 
+El frontend está construido con React y Vite, proporcionando una interfaz de usuario para interactuar con los microservicios backend.
 
+### Plugins de Vite
 
+Actualmente, dos plugins oficiales están disponibles:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) usa [Babel](https://babeljs.io/) (o [oxc](https://oxc.rs) cuando se usa en [rolldown-vite](https://vite.dev/guide/rolldown)) para Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) usa [SWC](https://swc.rs/) para Fast Refresh
+
+### React Compiler
+
+El React Compiler no está habilitado en esta plantilla debido a su impacto en el rendimiento de desarrollo y construcción. Para agregarlo, consulta [esta documentación](https://react.dev/learn/react-compiler/installation).
+
+### Configuración de ESLint
+
+Si estás desarrollando una aplicación de producción, recomendamos usar TypeScript con reglas de lint conscientes de tipos habilitadas. Consulta la [plantilla TS](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) para información sobre cómo integrar TypeScript y [`typescript-eslint`](https://typescript-eslint.io) en tu proyecto.
 
 ## Contribución
 
